@@ -1,0 +1,76 @@
+@media (pointer: fine) {
+  html,
+  body,
+  a,
+  button,
+  [data-cursor] {
+    cursor: none;
+  }
+  input {
+    cursor: text;
+  }
+}
+
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 300;
+  pointer-events: none;
+  border-radius: 50%;
+}
+
+.cursor-dot {
+  width: 6px;
+  height: 6px;
+  margin: -3px 0 0 -3px;
+  background: #fff;
+  mix-blend-mode: difference;
+}
+
+.cursor-ring {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  margin: -20px 0 0 -20px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  transition:
+    width 0.35s var(--ease),
+    height 0.35s var(--ease),
+    margin 0.35s var(--ease),
+    background 0.35s,
+    border-color 0.35s,
+    opacity 0.3s;
+}
+
+.cursor-ring span {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #000;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.cursor-ring.is-hover {
+  width: 64px;
+  height: 64px;
+  margin: -32px 0 0 -32px;
+  border-color: transparent;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(2px);
+}
+
+.cursor-ring.has-label {
+  width: 92px;
+  height: 92px;
+  margin: -46px 0 0 -46px;
+  background: var(--teal);
+}
+
+.cursor-ring.has-label span {
+  opacity: 1;
+}

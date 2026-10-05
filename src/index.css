@@ -1,0 +1,272 @@
+:root {
+  --bg: #050507;
+  --bg-2: #0b0b11;
+  --surface: rgba(255, 255, 255, 0.035);
+  --surface-2: rgba(255, 255, 255, 0.06);
+  --line: rgba(255, 255, 255, 0.09);
+  --text: #f3f3f6;
+  --muted: #9b9bab;
+  --dim: #5f5f6e;
+  --violet: #8b7bff;
+  --teal: #3fe0c5;
+  --lime: #c6ff6b;
+  --pink: #ff6fae;
+  --grad: linear-gradient(100deg, var(--violet) 0%, var(--teal) 55%, var(--lime) 100%);
+  --font-display: 'Unbounded', system-ui, sans-serif;
+  --font-body: 'Manrope', system-ui, sans-serif;
+  --gutter: clamp(16px, 4vw, 56px);
+  --radius: 28px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+  color-scheme: dark;
+  font-family: var(--font-body);
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: auto;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  overflow-x: hidden;
+  min-width: 320px;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+::selection {
+  background: var(--teal);
+  color: #000;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  margin: 0;
+  letter-spacing: -0.03em;
+  line-height: 1.02;
+}
+
+p {
+  margin: 0;
+}
+
+main {
+  position: relative;
+  overflow-x: clip;
+}
+
+.container {
+  width: 100%;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.section {
+  position: relative;
+  padding: clamp(96px, 14vw, 180px) 0;
+}
+
+.grad-text {
+  background: var(--grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ---------- Section heading ---------- */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.eyebrow::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--teal);
+  box-shadow: 0 0 12px var(--teal);
+}
+
+.section-head {
+  display: grid;
+  gap: 22px;
+  margin-bottom: clamp(48px, 7vw, 88px);
+  max-width: 860px;
+}
+
+.section-head h2 {
+  font-size: clamp(2.3rem, 6.4vw, 5.4rem);
+}
+
+.section-head p {
+  font-size: clamp(1rem, 1.4vw, 1.2rem);
+  line-height: 1.6;
+  color: var(--muted);
+  max-width: 620px;
+}
+
+.section-head--center {
+  margin-inline: auto;
+  text-align: center;
+  justify-items: center;
+}
+
+/* ---------- Split text ---------- */
+.split {
+  display: inline;
+}
+
+.split__word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
+
+.split__inner {
+  display: inline-block;
+  will-change: transform;
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  height: 54px;
+  padding: 0 28px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  font-weight: 600;
+  font-size: 15px;
+  white-space: nowrap;
+  transition: background 0.3s, border-color 0.3s, color 0.3s;
+  backdrop-filter: blur(12px);
+}
+
+.btn:hover {
+  background: var(--surface-2);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.btn--primary {
+  background: var(--text);
+  color: #08080b;
+  border-color: transparent;
+  overflow: hidden;
+}
+
+.btn--primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--grad);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.btn--primary:hover {
+  background: var(--text);
+}
+
+.btn--primary:hover::before {
+  opacity: 1;
+}
+
+.btn > span {
+  position: relative;
+}
+
+.btn svg {
+  position: relative;
+  width: 18px;
+  height: 18px;
+}
+
+/* ---------- Noise overlay ---------- */
+.noise {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  pointer-events: none;
+  opacity: 0.06;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---------- Scroll progress ---------- */
+.progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  z-index: 120;
+  transform-origin: 0 50%;
+  background: var(--grad);
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Градиент для разбитого на слова текста: красим каждое слово отдельно,
+   т.к. background-clip: text не доходит до трансформированных потомков */
+.split.grad-text {
+  background: none;
+  color: inherit;
+}
+
+.split.grad-text .split__inner {
+  background: var(--grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}

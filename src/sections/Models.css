@@ -1,0 +1,245 @@
+.models__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  align-items: stretch;
+}
+
+.models__grid > div {
+  display: flex;
+}
+
+.model {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.01));
+  cursor: pointer;
+  transition: transform 0.5s var(--ease);
+}
+
+.model:hover {
+  transform: translateY(-6px);
+}
+
+.model__border {
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: var(--grad);
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.model__badge {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  z-index: 2;
+  padding: 6px 12px;
+  border-radius: 99px;
+  background: var(--lime);
+  color: #0b0d05;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.model__stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  height: 380px;
+  overflow: hidden;
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+
+.model__glow {
+  position: absolute;
+  width: 70%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--glow);
+  filter: blur(70px);
+  opacity: 0.25;
+  transition: opacity 0.5s;
+}
+
+.model.is-active .model__glow,
+.model:hover .model__glow {
+  opacity: 0.45;
+}
+
+.model__body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+  padding: 0 28px 28px;
+}
+
+.model__body h3 {
+  font-size: clamp(1.4rem, 2vw, 1.8rem);
+}
+
+.model__tagline {
+  color: var(--muted);
+}
+
+.model__body ul {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 18px;
+  display: grid;
+  gap: 10px;
+}
+
+.model__body li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+}
+
+.model__body li::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--glow);
+  box-shadow: 0 0 10px var(--glow);
+  flex-shrink: 0;
+}
+
+.model__foot {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+}
+
+.model__price {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  letter-spacing: -0.03em;
+}
+
+.model__price small {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.model__foot .btn {
+  height: 46px;
+  padding: 0 24px;
+}
+
+/* ---------- Table ---------- */
+.compare-table {
+  margin-top: 16px;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  overflow: hidden;
+}
+
+.compare-table__scroll {
+  overflow-x: auto;
+}
+
+.compare-table table {
+  width: 100%;
+  min-width: 640px;
+  border-collapse: collapse;
+  font-size: 15px;
+}
+
+.compare-table th,
+.compare-table td {
+  padding: 18px 24px;
+  text-align: left;
+  border-bottom: 1px solid var(--line);
+  transition:
+    background 0.4s,
+    color 0.4s;
+}
+
+.compare-table tbody tr:last-child th,
+.compare-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.compare-table tbody th {
+  font-weight: 500;
+  color: var(--muted);
+  position: sticky;
+  left: 0;
+  background: #0a0a0f;
+  z-index: 1;
+}
+
+.compare-table thead th:first-child {
+  position: sticky;
+  left: 0;
+  background: #0a0a0f;
+  z-index: 1;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.compare-table thead button {
+  border: 0;
+  background: none;
+  padding: 0;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 17px;
+}
+
+.compare-table td {
+  color: var(--muted);
+}
+
+.compare-table .is-active {
+  background: rgba(63, 224, 197, 0.06);
+  color: var(--text);
+}
+
+.compare-table thead .is-active button {
+  color: var(--teal);
+}
+
+@media (max-width: 1000px) {
+  .models__grid {
+    grid-template-columns: 1fr;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  .model__stage {
+    height: 340px;
+  }
+}
+
+@media (max-width: 560px) {
+  .compare-table th,
+  .compare-table td {
+    padding: 14px 16px;
+    font-size: 14px;
+  }
+
+  .model__body {
+    padding: 0 22px 22px;
+  }
+}

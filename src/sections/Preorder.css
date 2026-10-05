@@ -1,0 +1,249 @@
+.pre__card {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  align-items: center;
+  min-height: 640px;
+  border-radius: clamp(28px, 4vw, 44px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.pre__bg {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(60% 80% at 85% 50%, rgba(139, 123, 255, 0.55), transparent 70%),
+    radial-gradient(50% 60% at 10% 100%, rgba(63, 224, 197, 0.35), transparent 70%),
+    radial-gradient(40% 50% at 30% 0%, rgba(255, 111, 174, 0.2), transparent 70%),
+    #0b0b12;
+}
+
+.pre__bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1px);
+  background-size: 22px 22px;
+  mask-image: linear-gradient(90deg, #000, transparent 70%);
+  -webkit-mask-image: linear-gradient(90deg, #000, transparent 70%);
+}
+
+.pre__content {
+  display: grid;
+  gap: 26px;
+  padding: clamp(28px, 6vw, 80px);
+}
+
+.pre__content h2 {
+  font-size: clamp(2.2rem, 5vw, 4.4rem);
+}
+
+.pre__lead {
+  max-width: 480px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.pre__lead b {
+  color: var(--text);
+}
+
+.pre__timer {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.pre__unit {
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  min-width: 84px;
+  padding: 14px 12px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--line);
+  backdrop-filter: blur(10px);
+}
+
+.pre__unit small {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.pre__digits {
+  display: flex;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 34px;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+.pre__digit {
+  position: relative;
+  display: inline-block;
+  width: 0.72em;
+  height: 1.15em;
+  overflow: hidden;
+  text-align: center;
+}
+
+.pre__digit > span {
+  position: absolute;
+  inset: 0;
+  line-height: 1.15em;
+}
+
+.pre__form {
+  position: relative;
+  display: flex;
+  gap: 8px;
+  max-width: 500px;
+  padding: 6px;
+  border-radius: 99px;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  transition: border-color 0.3s;
+}
+
+.pre__form:focus-within {
+  border-color: rgba(63, 224, 197, 0.6);
+}
+
+.pre__form.is-error {
+  border-color: #ff5c7a;
+  animation: shake 0.4s;
+}
+
+@keyframes shake {
+  25% {
+    transform: translateX(-6px);
+  }
+  50% {
+    transform: translateX(6px);
+  }
+  75% {
+    transform: translateX(-3px);
+  }
+}
+
+.pre__form input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: none;
+  padding: 0 18px;
+  font: inherit;
+  font-size: 16px;
+  color: var(--text);
+}
+
+.pre__form input::placeholder {
+  color: var(--dim);
+}
+
+.pre__form .btn {
+  height: 50px;
+}
+
+.pre__error {
+  position: absolute;
+  left: 24px;
+  top: calc(100% + 8px);
+  color: #ff7d95;
+  font-size: 13px;
+}
+
+.pre__done {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  max-width: 500px;
+  padding: 18px 22px;
+  border-radius: 22px;
+  background: rgba(63, 224, 197, 0.1);
+  border: 1px solid rgba(63, 224, 197, 0.4);
+}
+
+.pre__done b {
+  font-size: 18px;
+}
+
+.pre__done p {
+  color: var(--muted);
+  font-size: 14px;
+  margin-top: 4px;
+  word-break: break-word;
+}
+
+.pre__check {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  fill: none;
+  stroke: var(--teal);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.pre__phone {
+  display: grid;
+  place-items: center;
+  align-self: stretch;
+  padding: 40px 0;
+}
+
+.pre__device {
+  --w: clamp(200px, 20vw, 270px);
+}
+
+@media (max-width: 900px) {
+  .pre__card {
+    grid-template-columns: 1fr;
+  }
+
+  .pre__phone {
+    order: -1;
+    padding: 60px 0 0;
+    height: 420px;
+    overflow: hidden;
+    align-items: start;
+    /* на мобильных отключаем параллакс, чтобы телефон не наезжал на текст */
+    transform: none !important;
+  }
+
+  .pre__device {
+    --w: 200px;
+  }
+}
+
+@media (max-width: 560px) {
+  .pre__unit {
+    min-width: 0;
+    flex: 1;
+    padding: 12px 6px;
+  }
+
+  .pre__digits {
+    font-size: 24px;
+  }
+
+  .pre__form {
+    flex-direction: column;
+    border-radius: 24px;
+  }
+
+  .pre__form input {
+    height: 50px;
+  }
+
+  .pre__form .btn {
+    width: 100%;
+  }
+}

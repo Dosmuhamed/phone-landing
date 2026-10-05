@@ -1,0 +1,100 @@
+/* ---------- Marquee ---------- */
+.marquee {
+  position: relative;
+  padding: 60px 0;
+  overflow: hidden;
+}
+
+.marquee__row {
+  overflow: hidden;
+  padding: 18px 0;
+  border-block: 1px solid var(--line);
+}
+
+.marquee__row--a {
+  transform: rotate(-2.5deg) scale(1.05);
+  background: var(--text);
+  color: #08080b;
+  position: relative;
+  z-index: 2;
+}
+
+.marquee__row--b {
+  transform: rotate(2deg) scale(1.05);
+  margin-top: -18px;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+}
+
+.marquee__track {
+  display: flex;
+  width: max-content;
+  animation: marquee 40s linear infinite;
+}
+
+.marquee__track--rev {
+  animation-direction: reverse;
+  animation-duration: 50s;
+}
+
+.marquee__group {
+  display: flex;
+  flex-shrink: 0;
+}
+
+.marquee__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 32px;
+  padding-right: 32px;
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 3.2vw, 2.6rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
+.marquee__row--b .marquee__item {
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.55);
+  color: transparent;
+}
+
+.marquee__star {
+  width: 0.7em;
+  height: 0.7em;
+  fill: currentColor;
+}
+
+.marquee__row--a .marquee__star {
+  fill: #5b3cff;
+}
+
+.marquee__row--b .marquee__star {
+  fill: var(--teal);
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* ---------- Manifesto ---------- */
+.manifesto .container {
+  display: grid;
+  gap: 32px;
+  max-width: 1200px;
+}
+
+.manifesto__text {
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 4.4vw, 4rem);
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  font-weight: 500;
+}
+
+.manifesto__word {
+  display: inline-block;
+  white-space: pre;
+}

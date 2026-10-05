@@ -1,0 +1,492 @@
+.bento {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: minmax(260px, auto);
+  grid-auto-flow: dense;
+  gap: 16px;
+}
+
+.bento__card {
+  --mx: -500px;
+  --my: -500px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 28px;
+  border-radius: var(--radius);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.015));
+  border: 1px solid var(--line);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Прожектор под курсором */
+.bento__card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(420px circle at var(--mx) var(--my), rgba(63, 224, 197, 0.12), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.bento__card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: radial-gradient(300px circle at var(--mx) var(--my), rgba(139, 123, 255, 0.9), transparent 60%);
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.4s;
+  pointer-events: none;
+}
+
+.bento__card:hover::before,
+.bento__card:hover::after {
+  opacity: 1;
+}
+
+.bento__card h3 {
+  font-size: clamp(1.4rem, 2.2vw, 1.9rem);
+  letter-spacing: -0.03em;
+}
+
+.bento__card h3 small {
+  font-size: 0.55em;
+  color: var(--muted);
+}
+
+.bento__card p {
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.bento__head {
+  display: grid;
+  gap: 12px;
+}
+
+.bento__foot {
+  margin-top: auto;
+  display: grid;
+  gap: 8px;
+}
+
+.bento__display {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+.bento__battery {
+  grid-row: span 2;
+}
+
+.bento__ai {
+  grid-column: span 2;
+}
+
+/* ---------- Hz demo ---------- */
+.hz {
+  margin-top: auto;
+  display: grid;
+  gap: 18px;
+}
+
+.hz__screen {
+  position: relative;
+  height: 240px;
+  border-radius: 22px;
+  background: #07070c;
+  border: 1px solid var(--line);
+  overflow: hidden;
+}
+
+.hz__lines {
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.05) 0 1px, transparent 1px 40px);
+}
+
+.hz__ball {
+  position: absolute;
+  top: 30%;
+  left: 0;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--grad);
+  box-shadow: 0 0 40px rgba(63, 224, 197, 0.6);
+  animation: hz-move 2.2s ease-in-out infinite alternate;
+}
+
+.hz__ball--2 {
+  top: 62%;
+  width: 34px;
+  height: 34px;
+  background: #ff6fae;
+  box-shadow: 0 0 30px rgba(255, 111, 174, 0.6);
+  animation-duration: 1.6s;
+  animation-delay: -0.8s;
+}
+
+/* 60 Гц: имитируем «рваную» анимацию с размытием движения */
+.hz--60 .hz__ball {
+  animation-timing-function: steps(14, end);
+  filter: blur(1.5px);
+}
+
+@keyframes hz-move {
+  from {
+    left: 16px;
+  }
+  to {
+    left: calc(100% - 72px);
+  }
+}
+
+.hz__toggle {
+  display: inline-flex;
+  justify-self: start;
+  padding: 4px;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--line);
+}
+
+.hz__toggle button {
+  position: relative;
+  border: 0;
+  background: none;
+  padding: 10px 22px;
+  border-radius: 99px;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--muted);
+  transition: color 0.3s;
+}
+
+.hz__toggle button.is-active {
+  color: #08080b;
+}
+
+.hz__toggle button span:last-child {
+  position: relative;
+}
+
+.hz__pill {
+  position: absolute;
+  inset: 0;
+  border-radius: 99px;
+  background: #fff;
+}
+
+/* ---------- Battery ---------- */
+.battery {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  margin: 8px auto 20px;
+}
+
+.battery__cap {
+  width: 40px;
+  height: 12px;
+  border-radius: 6px 6px 0 0;
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.battery__body {
+  position: relative;
+  width: 120px;
+  height: 230px;
+  border-radius: 28px;
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  padding: 6px;
+  display: flex;
+  align-items: flex-end;
+}
+
+.battery__fill {
+  position: relative;
+  width: 100%;
+  border-radius: 20px;
+  background: linear-gradient(0deg, #3fe0c5, #c6ff6b);
+  box-shadow: 0 0 40px rgba(110, 255, 160, 0.35);
+  overflow: hidden;
+}
+
+.battery__wave {
+  position: absolute;
+  left: -50%;
+  top: -10px;
+  width: 200%;
+  height: 20px;
+  background: radial-gradient(circle at 10px -4px, transparent 12px, rgba(255, 255, 255, 0.35) 13px) 0 0 / 28px 20px repeat-x;
+  animation: wave 2s linear infinite;
+}
+
+@keyframes wave {
+  to {
+    transform: translateX(28px);
+  }
+}
+
+/* ---------- Charge ---------- */
+.bento__bolt {
+  width: 56px;
+  height: 56px;
+  display: grid;
+  place-items: center;
+  border-radius: 18px;
+  background: rgba(198, 255, 107, 0.1);
+  margin-bottom: auto;
+}
+
+.bento__bolt svg {
+  width: 28px;
+  fill: var(--lime);
+  filter: drop-shadow(0 0 10px var(--lime));
+  animation: zap 2.4s ease-in-out infinite;
+}
+
+@keyframes zap {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  45% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+  55% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 0.5;
+  }
+  65% {
+    opacity: 1;
+  }
+}
+
+/* ---------- Water ---------- */
+.bento__ripples {
+  position: relative;
+  width: 56px;
+  height: 56px;
+  margin-bottom: auto;
+}
+
+.bento__ripples span {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1.5px solid #5fb6ff;
+  animation: ripple 3s ease-out infinite;
+}
+
+.bento__ripples span:nth-child(2) {
+  animation-delay: 1s;
+}
+
+.bento__ripples span:nth-child(3) {
+  animation-delay: 2s;
+}
+
+@keyframes ripple {
+  from {
+    transform: scale(0.2);
+    opacity: 1;
+  }
+  to {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+
+/* ---------- AI ---------- */
+.ai {
+  position: relative;
+  margin-top: auto;
+  display: grid;
+  gap: 14px;
+}
+
+.ai__orb {
+  position: absolute;
+  right: -40px;
+  top: -150px;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, #8b7bff, #3fe0c5, #ff6fae, #8b7bff);
+  filter: blur(40px);
+  opacity: 0.5;
+  animation: spin 8s linear infinite;
+  z-index: -1;
+}
+
+.ai__input {
+  display: flex;
+  align-items: center;
+  min-height: 56px;
+  padding: 0 20px;
+  border-radius: 18px;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.ai__caret {
+  width: 2px;
+  height: 22px;
+  margin-left: 3px;
+  background: var(--teal);
+  animation: caret 0.9s steps(1) infinite;
+}
+
+@keyframes caret {
+  50% {
+    opacity: 0;
+  }
+}
+
+.ai__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.ai__chips span {
+  padding: 8px 14px;
+  border-radius: 99px;
+  border: 1px solid var(--line);
+  font-size: 13px;
+  color: var(--muted);
+  transition: all 0.4s;
+}
+
+.ai__chips span.is-active {
+  background: rgba(63, 224, 197, 0.14);
+  border-color: rgba(63, 224, 197, 0.5);
+  color: var(--text);
+}
+
+/* ---------- Fingerprint ---------- */
+.bento__fp {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  margin-bottom: auto;
+  color: var(--violet);
+  overflow: hidden;
+}
+
+.bento__fp svg {
+  width: 100%;
+  height: 100%;
+}
+
+.bento__scan {
+  position: absolute;
+  left: -10%;
+  right: -10%;
+  height: 3px;
+  background: var(--teal);
+  box-shadow: 0 0 16px 4px rgba(63, 224, 197, 0.6);
+  animation: scan 2.4s ease-in-out infinite;
+}
+
+@keyframes scan {
+  0%,
+  100% {
+    top: 0;
+  }
+  50% {
+    top: calc(100% - 3px);
+  }
+}
+
+/* ---------- Satellite ---------- */
+.bento__orbit {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  margin-bottom: auto;
+  border-radius: 50%;
+  border: 1px dashed rgba(255, 255, 255, 0.25);
+  animation: spin 6s linear infinite;
+}
+
+.bento__earth {
+  position: absolute;
+  inset: 18px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #7fd3ff, #1d4fd8 70%);
+  box-shadow: 0 0 20px rgba(80, 160, 255, 0.5);
+}
+
+.bento__sat-dot {
+  position: absolute;
+  top: -4px;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  margin-left: -4px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 12px #fff;
+}
+
+@media (max-width: 1080px) {
+  .bento {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .bento__battery {
+    grid-row: span 1;
+  }
+
+  .battery {
+    margin: 0 auto;
+  }
+
+  .battery__body {
+    height: 160px;
+    width: 90px;
+  }
+}
+
+@media (max-width: 640px) {
+  .bento {
+    grid-template-columns: 1fr;
+    grid-auto-rows: auto;
+  }
+
+  .bento__display,
+  .bento__ai {
+    grid-column: auto;
+    grid-row: auto;
+  }
+
+  .bento__card {
+    padding: 24px;
+    min-height: 220px;
+  }
+
+  .hz__screen {
+    height: 180px;
+  }
+}

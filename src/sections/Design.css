@@ -1,0 +1,269 @@
+.design {
+  overflow: hidden;
+}
+
+.design__glow {
+  position: absolute;
+  right: -10vw;
+  top: 50%;
+  width: 70vw;
+  height: 70vw;
+  max-width: 1000px;
+  max-height: 1000px;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  filter: blur(140px);
+  opacity: 0.22;
+  pointer-events: none;
+}
+
+.design__inner {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.design__copy .section-head {
+  margin-bottom: 40px;
+}
+
+.design__colors {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.design__swatch {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 0;
+  padding: 0;
+  box-shadow:
+    inset 0 2px 6px rgba(255, 255, 255, 0.35),
+    inset 0 -6px 10px rgba(0, 0, 0, 0.35);
+  transition: transform 0.3s var(--ease);
+}
+
+.design__swatch:hover {
+  transform: scale(1.1);
+}
+
+.design__swatch-ring {
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 1.5px solid #fff;
+}
+
+.design__color-name {
+  position: relative;
+  min-width: 180px;
+  height: 28px;
+  margin-left: 10px;
+  overflow: hidden;
+  font-weight: 600;
+  font-size: 17px;
+}
+
+.design__color-name span {
+  position: absolute;
+  line-height: 28px;
+}
+
+.design__facts {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  margin-top: 48px;
+  border-radius: 24px;
+  overflow: hidden;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+
+.design__fact {
+  display: grid;
+  gap: 6px;
+  padding: 24px;
+  background: var(--bg);
+}
+
+.design__fact b {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(1.4rem, 2.4vw, 2rem);
+  letter-spacing: -0.03em;
+}
+
+.design__fact span {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* ---------- Stage ---------- */
+.design__stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 720px;
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.design__phone {
+  --w: clamp(220px, 22vw, 300px);
+  position: relative;
+  z-index: 2;
+}
+
+.design__bigname {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(5rem, 13vw, 12rem);
+  letter-spacing: -0.06em;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.14);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.design__ring {
+  position: absolute;
+  inset: 50% auto auto 50%;
+  pointer-events: none;
+}
+
+.design__ring span {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 520px;
+  height: 520px;
+  translate: -50% -50%;
+  border-radius: 50%;
+  border: 1px dashed rgba(255, 255, 255, 0.12);
+  animation: spin 60s linear infinite;
+}
+
+.design__ring span:last-child {
+  width: 380px;
+  height: 380px;
+  border-style: solid;
+  border-color: rgba(255, 255, 255, 0.06);
+  animation-direction: reverse;
+  animation-duration: 40s;
+}
+
+.design__ring span:last-child::after {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--teal);
+  box-shadow: 0 0 20px var(--teal);
+}
+
+@keyframes spin {
+  to {
+    rotate: 360deg;
+  }
+}
+
+.design__hint {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  translate: -50% 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  border-radius: 99px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.04);
+  font-size: 13px;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.design__hint svg {
+  width: 18px;
+  height: 18px;
+}
+
+@media (max-width: 960px) {
+  .design__inner {
+    grid-template-columns: 1fr;
+  }
+
+  .design__copy {
+    display: contents;
+  }
+
+  .design__copy .section-head {
+    order: 0;
+    margin-bottom: 0;
+  }
+
+  .design__stage {
+    order: 1;
+    min-height: 600px;
+    margin: -20px 0;
+  }
+
+  .design__copy > :nth-child(2) {
+    order: 2;
+  }
+
+  .design__facts {
+    order: 3;
+    margin-top: 0;
+  }
+
+  .design__ring span {
+    width: 420px;
+    height: 420px;
+  }
+
+  .design__ring span:last-child {
+    width: 300px;
+    height: 300px;
+  }
+}
+
+@media (max-width: 560px) {
+  .design__stage {
+    min-height: 520px;
+  }
+
+  .design__phone {
+    --w: 200px;
+  }
+
+  .design__ring span {
+    width: 340px;
+    height: 340px;
+  }
+
+  .design__ring span:last-child {
+    width: 250px;
+    height: 250px;
+  }
+
+  .design__fact {
+    padding: 18px;
+  }
+}
